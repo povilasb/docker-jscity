@@ -13,7 +13,8 @@ RUN git clone https://github.com/aserg-ufmg/JSCity.git /opt/jscity
 RUN /etc/init.d/mysql start && \
 	mysql --user=root --password=root < /opt/jscity/sql/schema.sql && \
 	echo "create user 'jscity'@'localhost'; \
-		grant all privileges on jscity.* to 'jscity'@'localhost';" | \
+		grant all privileges on jscity.* to 'jscity'@'localhost'; | \
+		grant all privileges on *.* to 'root'@'%' identified by 'root';" \
 	mysql --user=root --password=root
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
